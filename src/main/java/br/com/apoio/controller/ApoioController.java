@@ -10,6 +10,6 @@ public class ApoioController {
 	@GetMapping
 	@RequestMapping(value = "/cursos")
 	public String listar() {
-		return "deu certo";
+		return "deu certo..";
 	}
 }
