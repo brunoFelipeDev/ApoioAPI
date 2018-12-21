@@ -11,14 +11,18 @@ import br.com.apoio.utils.UtilData;
 
 @Service
 public class ServicoImplantacao {
-	
+
 	@Autowired
 	private RepositorioImplantacao repositorioImplantacao;
 
 	public ImplantacoesDoMes getImplantacoesDoMes() throws SQLException {
 
-		
-		return repositorioImplantacao.getImplantacoesDoMes(UtilData.getPrimeiroDiaDaDataCompletaDoMesAtual(),
-				UtilData.getUltimoDiaDaDataCompletaDoMesAtual());
+		ImplantacoesDoMes implantacoesDoMes = repositorioImplantacao.getImplantacoesDoMes(
+				UtilData.getPrimeiroDiaDaDataCompletaDoMesAtual(), UtilData.getUltimoDiaDaDataCompletaDoMesAtual());
+
+		implantacoesDoMes.setQtdCancelado(repositorioImplantacao.getImplantacoesCanceladasDoMes(
+				UtilData.getPrimeiroDiaDaDataCompletaDoMesAtual(), UtilData.getUltimoDiaDaDataCompletaDoMesAtual()));
+
+		return implantacoesDoMes;
 	}
 }
