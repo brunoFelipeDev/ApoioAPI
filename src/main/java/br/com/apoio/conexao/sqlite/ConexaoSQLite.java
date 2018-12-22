@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class ConexaoSQLite {
 
 	private static Connection conexao;
@@ -19,12 +22,13 @@ public class ConexaoSQLite {
 	private Connection getConnection() {
 		try {
 			Class.forName("org.sqlite.JDBC");
-
 			conexao = DriverManager.getConnection(url);
 			return conexao;
+			
 		} catch (ClassNotFoundException ex) {
 			System.out.println("O driver não foi encontrado");
 			return null;
+			
 		} catch (SQLException ex) {
 			System.out.println("Problemas com a conexão\n" + ex.getMessage());
 			return null;
@@ -49,7 +53,7 @@ public class ConexaoSQLite {
 			Connection con = getConnection();
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(query);
-			// con.close();
+			//con.close();
 			return rs;
 		} catch (SQLException ex) {
 			System.out.println("Problemas com a conexão\n" + ex.getMessage());
