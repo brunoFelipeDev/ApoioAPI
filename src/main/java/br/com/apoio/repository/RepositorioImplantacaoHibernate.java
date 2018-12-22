@@ -5,16 +5,16 @@ import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.apoio.conexao.sqlite.ConexaoSQLite;
 import br.com.apoio.model.ImplantacoesDoMes;
 
 @Repository
-public class RepositorioImplantacaoHibernate implements RepositorioImplantacao {
+public class RepositorioImplantacaoHibernate extends Repositorio implements RepositorioImplantacao {
+	
+
 
 	@Override
 	public ImplantacoesDoMes getImplantacoesDoMes(String dataComeco, String dataFim) throws SQLException {
 
-		ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 		ResultSet rsSemConversao = conexaoSQLite
 				.executeQuery(getQueryConsultaImplatacoesDoMes("=", dataComeco, dataFim));
 
@@ -45,7 +45,6 @@ public class RepositorioImplantacaoHibernate implements RepositorioImplantacao {
 		String query = "SELECT COUNT(*) as soma FROM validacao_implantacao WHERE status = 'Cancelado' AND data_imp  BETWEEN '"
 				+ dataComeco + "' AND '" + dataFim + "';";
 
-		ConexaoSQLite conexaoSQLite = new ConexaoSQLite();
 		ResultSet resultSetSemConversao = conexaoSQLite.executeQuery(query);
 
 		if (resultSetSemConversao.next())
