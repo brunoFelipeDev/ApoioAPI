@@ -22,6 +22,7 @@ public class Treinamento {
 		String mes = data.substring(5, 7);
 		String ano = data.substring(0, 4);
 		return dia + "/" + mes + "/" + ano;
+
 	}
 
 	public void setData(String data) {

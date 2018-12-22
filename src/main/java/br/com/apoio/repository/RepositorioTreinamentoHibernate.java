@@ -52,6 +52,7 @@ public class RepositorioTreinamentoHibernate extends Repositorio implements Repo
 			treinamento.setData(rsTreinamento.getString("dia"));
 			posicao++;
 
+
 			treinamentos.add(treinamento);
 		}
 
