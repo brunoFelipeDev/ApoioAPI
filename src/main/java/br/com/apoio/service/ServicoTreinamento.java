@@ -18,8 +18,7 @@ public class ServicoTreinamento {
 	private RepositorioTreinamento repositorioTreinamento;
 	
 	public TreinamentosDoMes getTreinamentosDoMes() throws SQLException {
-		//return repositorioTreinamento.getInformacoesDosTreinamentosDoMes(UtilData.getPrimeiroDiaDaDataCompletaDoMesAtual(), UtilData.getUltimoDiaDaDataCompletaDoMesAtual());
-		return new TreinamentosDoMes();
+		return repositorioTreinamento.getInformacoesDosTreinamentosDoMes(UtilData.getPrimeiroDiaDaDataCompletaDoMesAtual(), UtilData.getUltimoDiaDaDataCompletaDoMesAtual());
 	}
 	
 	public Collection<Treinamento> getUltimosVinteTreinamentos() throws SQLException {
