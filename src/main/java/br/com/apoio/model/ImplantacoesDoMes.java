@@ -41,12 +41,12 @@ public class ImplantacoesDoMes {
 		this.qtdSemConversao = semConversao;
 	}
 
-	public int getImplantacoesTotal() {
+	public int getQuantidadeDeImplantacoesTotal() {
 		return getQtdComConversao() + getQtdSemConversao();
 	}
 
 	public BigDecimal getValorParaReceberNoMes() {
-		return new BigDecimal(getImplantacoesTotal()).multiply(new BigDecimal(50));
+		return new BigDecimal(getQuantidadeDeImplantacoesTotal()).multiply(new BigDecimal(50));
 	}
 
 }
