@@ -9,5 +9,5 @@ public interface RepositorioImplantacao {
 	ImplantacoesDoMes getImplantacoesDoMes(String dataComeco, String dataFim) throws SQLException;
 	
 	int getImplantacoesCanceladasDoMes(String dataComeco, String dataFim) throws SQLException;
-
+	
 }

@@ -7,6 +7,15 @@ public class ImplantacoesDoMes {
 	private int qtdCancelado;
 	private int qtdComConversao;
 	private int qtdSemConversao;
+	private TempoGasto tempoGasto;
+
+	public TempoGasto getTempoGastoNoProcesso() {
+		return tempoGasto;
+	}
+
+	public void setTempoGastoNoProcesso(TempoGasto tempoGasto) {
+		this.tempoGasto = tempoGasto;
+	}
 
 	public int getQtdCancelado() {
 		return qtdCancelado;
@@ -39,4 +48,5 @@ public class ImplantacoesDoMes {
 	public BigDecimal getValorParaReceberNoMes() {
 		return new BigDecimal(getImplantacoesTotal()).multiply(new BigDecimal(50));
 	}
+
 }
