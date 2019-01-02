@@ -28,4 +28,9 @@ public class ImplantacaoController {
 	public ImplantacoesDoMes listar() throws SQLException {
 		return servicoImplantacao.getImplantacoesDoMes();
 	}
+	
+	@GetMapping("/teste")
+	public String teste() {
+		return "Erguido com sucesso";
+	}
 }
