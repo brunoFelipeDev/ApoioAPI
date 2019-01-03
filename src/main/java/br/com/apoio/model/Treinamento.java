@@ -3,7 +3,7 @@ package br.com.apoio.model;
 public class Treinamento {
 
 	private int id;
-	private String razaoSocial;
+	private Cliente cliente;
 	private String funcaoTreinada;
 	private String tecnicoResponsavel;
 	private int duracao;
@@ -25,16 +25,16 @@ public class Treinamento {
 
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public void setData(String data) {
 		this.data = data;
-	}
-
-	public String getRazaoSocial() {
-		return razaoSocial;
-	}
-
-	public void setRazaoSocial(String razaoSocial) {
-		this.razaoSocial = razaoSocial;
 	}
 
 	public String getFuncaoTreinada() {

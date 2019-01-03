@@ -7,6 +7,7 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.apoio.model.Cliente;
 import br.com.apoio.model.Treinamento;
 import br.com.apoio.model.TreinamentosDoMes;
 
@@ -45,13 +46,12 @@ public class RepositorioTreinamentoHibernate extends Repositorio implements Repo
 		while (rsTreinamento.next()) {
 			treinamento = new Treinamento();
 			treinamento.setId(posicao);
-			treinamento.setRazaoSocial(rsTreinamento.getString("razaosocial"));
+			treinamento.setCliente(new Cliente(null, rsTreinamento.getString("razaosocial")));
 			treinamento.setDuracao(rsTreinamento.getInt("duracao"));
 			treinamento.setFuncaoTreinada(rsTreinamento.getString("funcaotreinada"));
 			treinamento.setTecnicoResponsavel(rsTreinamento.getString("instrutor"));
 			treinamento.setData(rsTreinamento.getString("dia"));
 			posicao++;
-
 
 			treinamentos.add(treinamento);
 		}

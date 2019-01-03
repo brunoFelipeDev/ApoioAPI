@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import br.com.apoio.conexao.sqlite.ConexaoSQLite;
 
 @Repository
-public class Repositorio {
+public class Repositorio  {
 
 	@Autowired
 	public ConexaoSQLite conexaoSQLite;

@@ -2,9 +2,13 @@ package br.com.apoio.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.apoio.model.Cliente;
+import br.com.apoio.model.ImplantacaoPendente;
 import br.com.apoio.model.ImplantacoesDoMes;
 import br.com.apoio.model.TempoGasto;
 
@@ -49,16 +53,14 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 				"SELECT SUM(qtd_agendamentos_imp) AS soma FROM validacao_implantacao WHERE conversao <> 'Sem conversão' AND status = 'Fechado' AND data_imp BETWEEN '"
 						+ dataComeco + "' AND '" + dataFim + "'");
 		if (rsQuantidadeDeAgendamentoGastoComConversao.next())
-			tempoGasto
-					.setAgendamentosGastosComConversao(rsQuantidadeDeAgendamentoGastoComConversao.getInt("soma"));
+			tempoGasto.setAgendamentosGastosComConversao(rsQuantidadeDeAgendamentoGastoComConversao.getInt("soma"));
 		rsQuantidadeDeAgendamentoGastoComConversao.close();
 
 		ResultSet rsQuantidadeDeAgendamentoGastoSemConversao = conexaoSQLite.executeQuery(
 				"SELECT SUM(qtd_agendamentos_imp) AS soma FROM validacao_implantacao WHERE conversao == 'Sem conversão' AND status = 'Fechado' AND data_imp BETWEEN '"
 						+ dataComeco + "' AND '" + dataFim + "'");
 		if (rsQuantidadeDeAgendamentoGastoSemConversao.next())
-			tempoGasto
-					.setAgendamentoGastosSemConversao(rsQuantidadeDeAgendamentoGastoSemConversao.getInt("soma"));
+			tempoGasto.setAgendamentoGastosSemConversao(rsQuantidadeDeAgendamentoGastoSemConversao.getInt("soma"));
 		rsQuantidadeDeAgendamentoGastoSemConversao.close();
 
 		implantacoesDoMes.setTempoGastoNoProcesso(tempoGasto);
@@ -85,4 +87,22 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 			return 0;
 	}
 
+	@Override
+	public Collection<ImplantacaoPendente> getImplantacoesPendentes() throws SQLException {
+
+		ResultSet rsImp = conexaoSQLite.executeQuery(
+				"SELECT *FROM validacao_implantacao WHERE data_imp is NULL AND UPPER(status) = UPPER('aberto')");
+
+		Collection<ImplantacaoPendente> implantacoesPendentes = new ArrayList<>();
+		ImplantacaoPendente implantacaoPendente;
+		while (rsImp.next()) {
+			implantacaoPendente = new ImplantacaoPendente();
+			implantacaoPendente.setSistemaDeConversao(rsImp.getString("conversao"));
+			implantacaoPendente
+					.setCliente(new Cliente(rsImp.getString("numero_serie"), rsImp.getString("razao_social")));
+			implantacoesPendentes.add(implantacaoPendente);
+		}
+
+		return implantacoesPendentes;
+	}
 }
