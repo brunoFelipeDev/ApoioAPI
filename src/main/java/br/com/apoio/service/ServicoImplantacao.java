@@ -31,4 +31,25 @@ public class ServicoImplantacao {
 	public Collection<ImplantacaoPendente> getImplantacoesPendentes() throws SQLException {
 		return repositorioImplantacao.getImplantacoesPendentes();
 	}
+
+	public int[] getImplantacoesPorMesDoAno(String ano) throws SQLException {
+
+		String dataInicial = "";
+		String dataFinal = "";
+		int[] numeros = new int[12];
+
+		for (int i = 1; i <= 12; i++) {
+			if (String.valueOf(i).length() == 1) {
+				dataInicial = ano + "-0" + i + "-01";
+				dataFinal = ano + "-0" + i + "-31";
+			} else {
+				dataInicial = ano + "-" + i + "-01";
+				dataFinal = ano + "-" + i + "-31";
+			}
+
+			numeros[i - 1] = repositorioImplantacao.getImplantacoesDoMes(dataInicial, dataFinal)
+					.getQuantidadeDeImplantacoesTotal();
+		}
+		return numeros;
+	}
 }

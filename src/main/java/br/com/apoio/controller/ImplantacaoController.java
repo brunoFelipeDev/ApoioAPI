@@ -1,13 +1,13 @@
 package br.com.apoio.controller;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,13 +36,10 @@ public class ImplantacaoController {
 	public Collection<ImplantacaoPendente> getImplantacoesPendentes() throws SQLException {
 		return servicoImplantacao.getImplantacoesPendentes();
 	}
-	
-	@GetMapping("/teste")
-	public Collection<int[]> getTeste() {
-		
-		Collection<int[]> numeros = new ArrayList<>();
-		numeros.add(new int[] {1,2,3,2,2});
-		numeros.add(new int[] {1,1,1,1,1});
-		return numeros;
+
+	@GetMapping("/totalPorMesNoAno/{ano}")
+	public int[] getTeste(@PathVariable("ano") String ano) throws SQLException {
+
+		return servicoImplantacao.getImplantacoesPorMesDoAno(ano);
 	}
 }
