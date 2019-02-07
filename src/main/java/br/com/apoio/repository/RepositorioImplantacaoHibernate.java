@@ -63,7 +63,29 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 			tempoGasto.setAgendamentoGastosSemConversao(rsQuantidadeDeAgendamentoGastoSemConversao.getInt("soma"));
 		rsQuantidadeDeAgendamentoGastoSemConversao.close();
 
-		implantacoesDoMes.setTempoGastoNoProcesso(tempoGasto);
+		implantacoesDoMes.setTempoGasto(tempoGasto);
+
+		ResultSet rsClientesImplantadosDoMes = conexaoSQLite.executeQuery(
+				"SELECT numero_serie, razao_social FROM validacao_implantacao WHERE status = 'Fechado' and data_imp BETWEEN '"
+						+ dataComeco + "' AND '" + dataFim + "'");
+		ArrayList<Cliente> clientes = new ArrayList<>();
+		while (rsClientesImplantadosDoMes.next()) {
+			clientes.add(new Cliente(rsClientesImplantadosDoMes.getString("numero_serie"),
+					rsClientesImplantadosDoMes.getString("razao_social")));
+		}
+		implantacoesDoMes.setClientesImplantadosSemCancelamento(clientes);
+		rsClientesImplantadosDoMes.close();
+
+		ResultSet rsClientesCanceladosDoMes = conexaoSQLite.executeQuery(
+				"SELECT numero_serie, razao_social FROM validacao_implantacao WHERE status = 'Cancelado' and data_imp BETWEEN '"
+						+ dataComeco + "' AND '" + dataFim + "'");
+		ArrayList<Cliente> clientesCancelados = new ArrayList<>();
+		while (rsClientesCanceladosDoMes.next()) {
+			clientesCancelados.add(new Cliente(rsClientesCanceladosDoMes.getString("numero_serie"),
+					rsClientesCanceladosDoMes.getString("razao_social")));
+		}
+		implantacoesDoMes.setClientesQueCancelaramNoMes(clientesCancelados);
+		rsClientesCanceladosDoMes.close();
 
 		return implantacoesDoMes;
 	}

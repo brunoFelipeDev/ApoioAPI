@@ -1,6 +1,7 @@
 package br.com.apoio.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
 public class ImplantacoesDoMes {
 
@@ -8,12 +9,30 @@ public class ImplantacoesDoMes {
 	private int qtdComConversao;
 	private int qtdSemConversao;
 	private TempoGasto tempoGasto;
+	private ArrayList<Cliente> clientesImplantadosSemCancelamento;
+	private ArrayList<Cliente> clientesQueCancelaramNoMes;
 
-	public TempoGasto getTempoGastoNoProcesso() {
+		public ArrayList<Cliente> getClientesQueCancelaramNoMes() {
+		return clientesQueCancelaramNoMes;
+	}
+
+	public void setClientesQueCancelaramNoMes(ArrayList<Cliente> clientesQueCancelaramNoMes) {
+		this.clientesQueCancelaramNoMes = clientesQueCancelaramNoMes;
+	}
+
+	public ArrayList<Cliente> getClientesImplantadosSemCancelamento() {
+		return clientesImplantadosSemCancelamento;
+	}
+
+	public void setClientesImplantadosSemCancelamento(ArrayList<Cliente> clientes) {
+		this.clientesImplantadosSemCancelamento = clientes;
+	}
+
+	public TempoGasto getTempoGasto() {
 		return tempoGasto;
 	}
 
-	public void setTempoGastoNoProcesso(TempoGasto tempoGasto) {
+	public void setTempoGasto(TempoGasto tempoGasto) {
 		this.tempoGasto = tempoGasto;
 	}
 

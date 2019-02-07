@@ -13,4 +13,5 @@ public interface RepositorioImplantacao {
 	int getImplantacoesCanceladasDoMes(String dataComeco, String dataFim) throws SQLException;
 
 	Collection<ImplantacaoPendente> getImplantacoesPendentes() throws SQLException;
+	
 }

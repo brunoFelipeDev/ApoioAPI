@@ -4,7 +4,16 @@ public class Cliente {
 
 	private String numeroDeSerie;
 	private String razaoSocial;
-	
+	private String sistemaDeConversao;
+
+	public String getSistemaDeConversao() {
+		return sistemaDeConversao;
+	}
+
+	public void setSistemaDeConversao(String sistemaDeConversao) {
+		this.sistemaDeConversao = sistemaDeConversao;
+	}
+
 	public Cliente(String numeroDeSerie, String razaoSocial) {
 		super();
 		this.numeroDeSerie = numeroDeSerie;
