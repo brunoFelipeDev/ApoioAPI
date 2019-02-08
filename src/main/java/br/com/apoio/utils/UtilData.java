@@ -28,4 +28,15 @@ public class UtilData {
 	public static String getUltimoDiaDaDataCompletaDoMesAtual() {
 		return getAnoAtual() + "-" + getMesAtual() + "-" + "31";
 	}
+
+	public static String getConverteDataAoContrario(String data) {
+		if (data != null || !data.equals("")) {
+			String dia = data.substring(8, 10);
+			String mes = data.substring(5, 7);
+			String ano = data.substring(0, 4);
+			return dia + "/" + mes + "/" + ano;
+		}
+		return null;
+
+	}
 }

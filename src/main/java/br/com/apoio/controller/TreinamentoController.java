@@ -30,7 +30,7 @@ public class TreinamentoController {
 	public TreinamentosDoMes getInformacoesDosTreinamentosDoMes() throws SQLException {
 		return servicoTreinamento.getTreinamentosDoMes();
 	}
-	
+
 	@GetMapping(value = "/ultimosvinte", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ApiOperation(value = "Retonar os ultimos vinte treinamentos do mês")
 	public Collection<Treinamento> getUltimosVinteTreinamentos() throws SQLException {

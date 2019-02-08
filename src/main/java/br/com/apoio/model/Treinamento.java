@@ -1,5 +1,7 @@
 package br.com.apoio.model;
 
+import br.com.apoio.utils.UtilData;
+
 public class Treinamento {
 
 	private int id;
@@ -18,10 +20,7 @@ public class Treinamento {
 	}
 
 	public String getData() {
-		String dia = data.substring(8, 10);
-		String mes = data.substring(5, 7);
-		String ano = data.substring(0, 4);
-		return dia + "/" + mes + "/" + ano;
+		return UtilData.getConverteDataAoContrario(data);
 
 	}
 

@@ -66,23 +66,23 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 		implantacoesDoMes.setTempoGasto(tempoGasto);
 
 		ResultSet rsClientesImplantadosDoMes = conexaoSQLite.executeQuery(
-				"SELECT numero_serie, razao_social FROM validacao_implantacao WHERE status = 'Fechado' and data_imp BETWEEN '"
+				"SELECT * FROM validacao_implantacao WHERE status = 'Fechado' and data_imp BETWEEN '"
 						+ dataComeco + "' AND '" + dataFim + "'");
 		ArrayList<Cliente> clientes = new ArrayList<>();
 		while (rsClientesImplantadosDoMes.next()) {
 			clientes.add(new Cliente(rsClientesImplantadosDoMes.getString("numero_serie"),
-					rsClientesImplantadosDoMes.getString("razao_social")));
+					rsClientesImplantadosDoMes.getString("razao_social"), rsClientesImplantadosDoMes.getString("conversao"), rsClientesImplantadosDoMes.getString("data_imp")));
 		}
 		implantacoesDoMes.setClientesImplantadosSemCancelamento(clientes);
 		rsClientesImplantadosDoMes.close();
 
 		ResultSet rsClientesCanceladosDoMes = conexaoSQLite.executeQuery(
-				"SELECT numero_serie, razao_social FROM validacao_implantacao WHERE status = 'Cancelado' and data_imp BETWEEN '"
+				"SELECT * FROM validacao_implantacao WHERE status = 'Cancelado' and data_imp BETWEEN '"
 						+ dataComeco + "' AND '" + dataFim + "'");
 		ArrayList<Cliente> clientesCancelados = new ArrayList<>();
 		while (rsClientesCanceladosDoMes.next()) {
 			clientesCancelados.add(new Cliente(rsClientesCanceladosDoMes.getString("numero_serie"),
-					rsClientesCanceladosDoMes.getString("razao_social")));
+					rsClientesCanceladosDoMes.getString("razao_social"), rsClientesCanceladosDoMes.getString("conversao"), rsClientesCanceladosDoMes.getString("data_imp")));
 		}
 		implantacoesDoMes.setClientesQueCancelaramNoMes(clientesCancelados);
 		rsClientesCanceladosDoMes.close();
@@ -121,7 +121,7 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 			implantacaoPendente = new ImplantacaoPendente();
 			implantacaoPendente.setSistemaDeConversao(rsImp.getString("conversao"));
 			implantacaoPendente
-					.setCliente(new Cliente(rsImp.getString("numero_serie"), rsImp.getString("razao_social")));
+					.setCliente(new Cliente(rsImp.getString("numero_serie"), rsImp.getString("razao_social"), rsImp.getString("conversao"), rsImp.getString("data_imp")));
 			implantacoesPendentes.add(implantacaoPendente);
 		}
 
