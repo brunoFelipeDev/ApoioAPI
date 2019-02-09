@@ -67,7 +67,7 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 
 		ResultSet rsClientesImplantadosDoMes = conexaoSQLite.executeQuery(
 				"SELECT * FROM validacao_implantacao WHERE status = 'Fechado' and data_imp BETWEEN '"
-						+ dataComeco + "' AND '" + dataFim + "'");
+						+ dataComeco + "' AND '" + dataFim + "' ORDER BY data_imp DESC");
 		ArrayList<Cliente> clientes = new ArrayList<>();
 		while (rsClientesImplantadosDoMes.next()) {
 			clientes.add(new Cliente(rsClientesImplantadosDoMes.getString("numero_serie"),
@@ -78,7 +78,7 @@ public class RepositorioImplantacaoHibernate extends Repositorio implements Repo
 
 		ResultSet rsClientesCanceladosDoMes = conexaoSQLite.executeQuery(
 				"SELECT * FROM validacao_implantacao WHERE status = 'Cancelado' and data_imp BETWEEN '"
-						+ dataComeco + "' AND '" + dataFim + "'");
+						+ dataComeco + "' AND '" + dataFim + "' ORDER BY data_imp DESC");
 		ArrayList<Cliente> clientesCancelados = new ArrayList<>();
 		while (rsClientesCanceladosDoMes.next()) {
 			clientesCancelados.add(new Cliente(rsClientesCanceladosDoMes.getString("numero_serie"),

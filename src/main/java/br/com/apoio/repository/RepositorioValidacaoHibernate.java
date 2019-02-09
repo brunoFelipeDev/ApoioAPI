@@ -24,7 +24,7 @@ public class RepositorioValidacaoHibernate extends Repositorio implements Reposi
 			validacaoPendente = new ValidacaoPendente();
 			validacaoPendente.setSistemaDeConversao(rsVal.getString("sistema_conversao"));
 			validacaoPendente.setCliente(new Cliente(rsVal.getString("numero_serie"), rsVal.getString("razao_social"),
-					rsVal.getString("conversao"), null));
+					rsVal.getString("sistema_conversao"), null));
 			validacoesPendentes.add(validacaoPendente);
 		}
 
